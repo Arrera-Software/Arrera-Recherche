@@ -167,6 +167,7 @@ class ArreraRecherche :
         boutonReverso.place(x=50,y=325)
         #label
         labelText.place(x=0,y=0)
+        self.__getTouches(13)
 
     def __searchWordReference(self,requette:str):
         if requette :
@@ -280,6 +281,12 @@ class ArreraRecherche :
         sortie = self.__zoneEntrer.get()
         self.__zoneEntrer.delete(0,END)
         return sortie
+
+    def __getTouches(self,touche1):
+        def anychar(event):
+            if event.keycode == touche1:
+                self.__valider(self.__getRecherche())
+        self.__windows.bind("<Key>", anychar)
 
     def boot(self):
         if (self.__objRecherche.getEtatInternet()==True):
