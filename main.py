@@ -65,18 +65,7 @@ def InterafaceSearch():
                 AmazonSearch(text)
         else :
             duckduckgoSearch(requette)
-    def WordReference():
-        requette = ZoneEntrer.get()
-        WordreferenceSearch(requette)
-    def Wikipedia():
-        requette = ZoneEntrer.get()
-        WikipediaSearch(requette)
-    def Reverso():
-        requette = ZoneEntrer.get()
-        ReversoSeacrch(requette)
-    def music():
-        requette = ZoneEntrer.get()
-        YTmusicSearch(requette)
+    
     #Bouton
     BoutonValider = Button(cadreSearch,command=Valider,image=iconRecherche,bg=Color)
     BoutonWordReference = Button(cadreLeft,bg=Color,image=iconWordreference,command=WordReference)
@@ -103,9 +92,37 @@ def InterafaceSearch():
     #boucle tkinter
     ScreenSearch.mainloop()   
 
-
 EtatInternet = TestInternet()
 if EtatInternet == True:
     InterafaceSearch()
 if EtatInternet == False :
     NoInternet()
+
+class ArreraRecherche :
+    def __init__(self):
+        self.__objRecherche = CNetWork()
+        self.__color = "#3c0f14"
+        self.__textColor = "white"
+        self.__tailleText =  "15"
+        self.__windows = Tk()
+        self.__windows.iconphoto(False,PhotoImage(file="image/ArreraRecherche.png"))
+        self.__windows.title("Arrera Recherche")
+        self.__windows.config(bg=self.__color)
+
+    def __searchWordReference(self,requette:str):
+        self.__objRecherche.WordreferenceSearch(requette)
+
+    def __searchWikipedia(self,requette:str):
+        self.__objRecherche.WikipediaSearch(requette)
+
+    def __searchReverso(self,requette:str):
+        self.__objRecherche.ReversoSeacrch(requette)
+
+    def __searchYtMusic(self,requette:str):
+        self.__objRecherche.YTmusicSearch(requette)
+    
+    def __guiNoInternet(self):
+        self.__windows.maxsize(525,70)
+        self.__windows.minsize(525,70)
+        label=Label(self.__windows,text="Pas d'acces a internet",font=("arial",30),bg="black",fg="white").pack()
+        self.__windows.mainloop()
