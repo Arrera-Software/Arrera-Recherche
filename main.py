@@ -6,9 +6,8 @@ from tkinter.messagebox import*
 class ArreraRecherche :
     def __init__(self):
         self.__objRecherche = CNetWork()
-        self.__color = "#3c0f14"
-        self.__textColor = "white"
-        self.__tailleText =  "15"
+        self.__color = "white"
+        self.__textColor = "black"
         self.__windows = Tk()
         self.__windows.iconphoto(False,PhotoImage(file="image/ArreraRecherche.png"))
         self.__windows.title("Arrera Recherche")
@@ -26,7 +25,7 @@ class ArreraRecherche :
         cadreLeft = Frame(self.__windows,bg=self.__color,width=175,height=550)
         cadreRight = Frame(self.__windows,bg=self.__color,width=330,height=550)
         #Zone de texte
-        self.__zoneEntrer = Entry(cadreSearch,bg="white",bd=0,font=("arial","13"))
+        self.__zoneEntrer = Entry(cadreSearch,bg="white",bd=0,font=("arial","13"),relief="solid", borderwidth=2)
         #Bouton
         BoutonValider = Button(cadreSearch,bg=self.__color,command=lambda : self.__valider(self.__getRecherche()))
         BoutonWordReference = Button(cadreLeft,bg=self.__color,command=lambda : self.__searchWordReference(self.__getRecherche()))
