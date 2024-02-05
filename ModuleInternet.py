@@ -50,12 +50,9 @@ class CNetWork :
 
     def duckduckgoSearch(self,query:str)->bool:
         if (self.__etatInternet==True):
-            with requests.session() as c:
-                url = 'https://duckduckgo.com/?q'
-                query = {'q': query}
-                urllink = requests.get(url, params=query)
-                lienduck = urllink.url
-                webbrowser.open(lienduck)
+            url = 'https://duckduckgo.com/?q='
+            lienduck = url+query
+            webbrowser.open(lienduck)
             return True
         else:
             return False
@@ -142,12 +139,12 @@ class CNetWork :
 
     def GrandRecherche(self,query:str)->bool:
         if (self.__etatInternet==True):
-            googleSearch(query)
-            duckduckgoSearch(query)
-            QwantSearch(query)
-            EcosiaSearch(query)
-            bingSearch(query) 
-            braveSearch(query)
+            self.googleSearch(query)
+            self.duckduckgoSearch(query)
+            self.QwantSearch(query)
+            self.EcosiaSearch(query)
+            self.bingSearch(query) 
+            self.braveSearch(query)
             return True
         else:
             return False
