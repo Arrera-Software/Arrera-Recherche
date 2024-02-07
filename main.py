@@ -14,11 +14,15 @@ class ArreraRecherche :
         self.__windows.iconphoto(False,PhotoImage(file="image/ArreraRecherche.png"))
         self.__windows.title("Arrera Recherche")
         self.__windows.config(bg=self.__color)
+        self.__nameApp = "Arrera Recherche"
+        self.__versionApp = ""
+        self.__imagePath = "image/ArreraRecherche.png"
+        self.__copyrightApp = "Copyright Arrera Software by Baptiste P 2023-2024"
     
     def __guiSearch(self):
         #Fenetre
-        self.__windows.iconphoto(False,PhotoImage(file="image/ArreraRecherche.png"))
-        self.__windows.title("Arrera Recherche")
+        self.__windows.iconphoto(False,PhotoImage(file=self.__imagePath))
+        self.__windows.title(self.__nameApp)
         self.__windows.maxsize(550,680)
         self.__windows.minsize(550,680)
         self.__windows.config(bg=self.__color)
@@ -30,7 +34,7 @@ class ArreraRecherche :
         #cadreLeft
         btnHistorique = Button(cadreLeft,bg=self.__color)
         btnParametre = Button(cadreLeft,bg=self.__color)
-        btnApropos = Button(cadreLeft,bg=self.__color)
+        btnApropos = Button(cadreLeft,bg=self.__color,command=self.Apropop)
         #Image BTN
         imageAbout = Image.open("image/IconAbout.png")
         imageSetting = Image.open("image/para.png")
@@ -209,6 +213,33 @@ class ArreraRecherche :
             if event.keycode == touche1:
                 self.__valider(self.__getRecherche())
         self.__windows.bind("<Key>", anychar)
+    
+    def Apropop(self):
+        tailleIMG = (100,100)
+        #Creation de la fenetre
+        about = Toplevel()
+        about.title("A propos : "+self.__nameApp)
+        about.iconphoto(False,PhotoImage(file=self.__imagePath))
+        about.configure(bg=self.__color)
+        about.maxsize(400,300)
+        about.minsize(400,300)
+        #Traitement Image
+        imageOrigine = Image.open(self.__imagePath)    
+        imageRedim = imageOrigine.resize(tailleIMG)
+        #Label
+        labelIcon = Label(about,bg=self.__color)
+        icon = ImageTk.PhotoImage(imageRedim,master=labelIcon)
+        labelIcon.image_names = icon
+        labelIcon.configure(image=icon)
+        labelName = Label(about,text="\n"+self.__nameApp+"\n",font=("arial","12"),bg=self.__color)
+        labelVersion = Label(about,text=self.__versionApp+"\n",font=("arial","11"),bg=self.__color)
+        labelCopyright = Label(about,text=self.__copyrightApp,font=("arial","9"),bg=self.__color)
+        #affichage
+        labelIcon.pack()
+        labelName.pack()
+        labelVersion.pack()
+        labelCopyright.pack()
+        about.mainloop()
 
     def boot(self):
         if (self.__objRecherche.getEtatInternet()==True):
