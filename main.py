@@ -21,53 +21,60 @@ class ArreraRecherche :
         self.__windows.minsize(550,680)
         self.__windows.config(bg=self.__color)
         #Cadre
-        cadreSearch = Frame(self.__windows,bg=self.__color,width=500,height=100)
-        cadreLeft = Frame(self.__windows,bg=self.__color,width=175,height=550)
-        cadreRight = Frame(self.__windows,bg=self.__color,width=330,height=550)
+        cadreSearch = Frame(self.__windows,bg="red",width=500,height=70)
+        cadreLeft = Frame(self.__windows,bg="yellow",width=50,height=680)
+        cadreRight = Frame(self.__windows,bg="green",width=500,height=610)
+        #bouton
+        #cadreLeft
+        btnHistorique = Button(cadreLeft,width="5",height="2")
+        btnParametre = Button(cadreLeft,width="5",height="2")
+        btnApropos = Button(cadreLeft,width="5",height="2")
+        #cadreRight
+        btnResult = [
+            Button(cadreRight,width=40,font=("arial","15")),#duck
+            Button(cadreRight,width=40,font=("arial","15")),#google
+            Button(cadreRight,width=40,font=("arial","15")),#Bing
+            Button(cadreRight,width=40,font=("arial","15")),#Brave
+            Button(cadreRight,width=40,font=("arial","15")),#Ecosia
+            Button(cadreRight,width=40,font=("arial","15")),#Qwant
+            Button(cadreRight,width=40,font=("arial","15")),#bigSearch
+            Button(cadreRight,width=40,font=("arial","15")),#Wikipedia
+            Button(cadreRight,width=40,font=("arial","15")),#Amazon
+            Button(cadreRight,width=40,font=("arial","15")),#WordReference
+            Button(cadreRight,width=40,font=("arial","15")),#YtMusic
+            Button(cadreRight,width=40,font=("arial","15"))#Reverso
+        ]
         #Zone de texte
-        self.__zoneEntrer = Entry(cadreSearch,bg="white",bd=0,font=("arial","13"),relief="solid", borderwidth=2)
-        #Bouton
-        BoutonValider = Button(cadreSearch,bg=self.__color,command=lambda : self.__valider(self.__getRecherche()))
-        BoutonWordReference = Button(cadreLeft,bg=self.__color,command=lambda : self.__searchWordReference(self.__getRecherche()))
-        BoutonWikipedia = Button(cadreLeft,bg=self.__color,command=lambda :self.__searchWikipedia(self.__getRecherche()))
-        boutonReverso = Button(cadreLeft,bg=self.__color,command=lambda :self.__searchReverso(self.__getRecherche()))   
-        BoutonMusic = Button(cadreLeft,bg=self.__color,command=lambda :self.__searchYtMusic(self.__getRecherche()))
-        #var image 
-        iconValider = PhotoImage(file="image/iconRecherche.png",master=BoutonValider)
-        iconMusic =  PhotoImage(file="image/Music.png",master=BoutonMusic)
-        iconWikipedia = PhotoImage(file="image/iconWikipedia.png",master=BoutonWikipedia)
-        iconWordreference = PhotoImage(file="image/iconWordreference.png",master=boutonReverso)
-        iconReverso=PhotoImage(file="image/iconReverso.png",master=BoutonMusic)
-        #Application des image
-        BoutonValider.image_names=iconValider
-        BoutonWordReference.image_names=iconWordreference
-        BoutonWikipedia.image_names=iconWikipedia
-        boutonReverso.image_names=iconReverso  
-        BoutonMusic.image_names=iconMusic
-        BoutonValider.configure(image=iconValider)
-        BoutonWordReference.configure(image=iconWordreference)
-        BoutonWikipedia.configure(image=iconWikipedia)
-        boutonReverso.configure(image=iconReverso)   
-        BoutonMusic.configure(image=iconMusic)
-        #label
-        labelText=Label(cadreRight,
-                        text="Drapeau pour lancer une recherche :\n\n-google : @gg\n\n-Ecosia : @ec\n\n-Qwant : @qw\n\n-Brave : @br\n\n-Bing : @bg\n\n-Grand Recherche : @gr\n\n-Amazon : @am"
-                        ,bg=self.__color,font=("arial","15"),fg=self.__textColor)
+        self.__zoneEntrer = Entry(cadreSearch,bg="white",bd=0,font=("arial","13"),width=50,relief="solid", borderwidth=2)
+        
+        #Calcule de passement
+        largeurCadreLeft = cadreLeft.winfo_reqwidth()
+        largeurcadreRight = cadreRight.winfo_reqwidth()
+        largeurBTN = (btnResult[1].winfo_reqheight()/2)
         #affichage
         #cadre
-        cadreSearch.pack(side="top")
-        cadreLeft.pack(side="left")
-        cadreRight.pack(side="right")
+        cadreSearch.place(x=50,y=0)
+        cadreLeft.place(x=0,y=0)
+        cadreRight.place(x=50,y=70)
+        #btnCadreLeft
+        btnHistorique.place(x=((largeurCadreLeft-btnHistorique.winfo_reqwidth())//2),y=45)
+        btnParametre.place(x=((largeurCadreLeft-btnParametre.winfo_reqwidth())//2),y=105)
+        btnApropos.place(x=((largeurCadreLeft-btnApropos.winfo_reqwidth())//2),y=620)
+        #btncadreRight
+        btnResult[0].place(x=((largeurcadreRight-btnResult[0].winfo_reqwidth())//2),y=15)
+        btnResult[1].place(x=((largeurcadreRight-btnResult[1].winfo_reqwidth())//2),y=60)
+        btnResult[2].place(x=((largeurcadreRight-btnResult[2].winfo_reqwidth())//2),y=105)
+        btnResult[3].place(x=((largeurcadreRight-btnResult[3].winfo_reqwidth())//2),y=150)
+        btnResult[4].place(x=((largeurcadreRight-btnResult[4].winfo_reqwidth())//2),y=195)
+        btnResult[5].place(x=((largeurcadreRight-btnResult[5].winfo_reqwidth())//2),y=240)
+        btnResult[6].place(x=((largeurcadreRight-btnResult[6].winfo_reqwidth())//2),y=285)
+        btnResult[7].place(x=((largeurcadreRight-btnResult[7].winfo_reqwidth())//2),y=330)
+        btnResult[8].place(x=((largeurcadreRight-btnResult[8].winfo_reqwidth())//2),y=375)
+        btnResult[9].place(x=((largeurcadreRight-btnResult[0].winfo_reqwidth())//2),y=420)
+        btnResult[10].place(x=((largeurcadreRight-btnResult[10].winfo_reqwidth())//2),y=465)
+        btnResult[11].place(x=((largeurcadreRight-btnResult[11].winfo_reqwidth())//2),y=510)
         #zone de texte
-        self.__zoneEntrer.place(x=10,y=30,width=395,height=30)
-        #bouton
-        BoutonValider.place(x=420,y=15)
-        BoutonMusic.place(x=50,y=25)
-        BoutonWordReference.place(x=50,y=125)
-        BoutonWikipedia.place(x=50,y=225)
-        boutonReverso.place(x=50,y=325)
-        #label
-        labelText.place(x=0,y=0)
+        self.__zoneEntrer.place(relx=0.5,rely=0.5,anchor="center")
         self.__getTouches(13)
 
     def __searchWordReference(self,requette:str):
