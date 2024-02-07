@@ -3,11 +3,13 @@ from ModuleInternet import*
 import os
 from time import*
 from tkinter.messagebox import*
+from PIL import Image, ImageTk 
 class ArreraRecherche :
     def __init__(self):
         self.__objRecherche = CNetWork()
         self.__color = "white"
         self.__textColor = "black"
+        self.__secondColor =  "#9e9e9e"
         self.__windows = Tk()
         self.__windows.iconphoto(False,PhotoImage(file="image/ArreraRecherche.png"))
         self.__windows.title("Arrera Recherche")
@@ -21,28 +23,41 @@ class ArreraRecherche :
         self.__windows.minsize(550,680)
         self.__windows.config(bg=self.__color)
         #Cadre
-        cadreSearch = Frame(self.__windows,bg="red",width=500,height=70)
-        cadreLeft = Frame(self.__windows,bg="yellow",width=50,height=680)
-        cadreRight = Frame(self.__windows,bg="green",width=500,height=610)
+        cadreSearch = Frame(self.__windows,bg=self.__color,width=500,height=70)
+        cadreLeft = Frame(self.__windows,bg=self.__secondColor,width=50,height=680)
+        cadreRight = Frame(self.__windows,bg=self.__color,width=500,height=610)
         #bouton
         #cadreLeft
-        btnHistorique = Button(cadreLeft,width="5",height="2")
-        btnParametre = Button(cadreLeft,width="5",height="2")
-        btnApropos = Button(cadreLeft,width="5",height="2")
+        btnHistorique = Button(cadreLeft,bg=self.__color)
+        btnParametre = Button(cadreLeft,bg=self.__color)
+        btnApropos = Button(cadreLeft,bg=self.__color)
+        #Image BTN
+        imageAbout = Image.open("image/IconAbout.png")
+        imageSetting = Image.open("image/para.png")
+        imageHistorique = Image.open("image/historique.png")
+        iconAbout = ImageTk.PhotoImage(imageAbout.resize((40,40)))
+        btnApropos.image_names = iconAbout
+        btnApropos.configure(image=iconAbout)
+        iconSetting = ImageTk.PhotoImage(imageSetting.resize((40,40)))
+        btnParametre.image_names = iconSetting
+        btnParametre.configure(image=iconSetting)
+        iconHistorique = ImageTk.PhotoImage(imageHistorique.resize((40,40)))
+        btnHistorique.image_names = iconHistorique
+        btnHistorique.configure(image=iconHistorique)
         #cadreRight
         btnResult = [
-            Button(cadreRight,width=40,font=("arial","15")),#duck
-            Button(cadreRight,width=40,font=("arial","15")),#google
-            Button(cadreRight,width=40,font=("arial","15")),#Bing
-            Button(cadreRight,width=40,font=("arial","15")),#Brave
-            Button(cadreRight,width=40,font=("arial","15")),#Ecosia
-            Button(cadreRight,width=40,font=("arial","15")),#Qwant
-            Button(cadreRight,width=40,font=("arial","15")),#bigSearch
-            Button(cadreRight,width=40,font=("arial","15")),#Wikipedia
-            Button(cadreRight,width=40,font=("arial","15")),#Amazon
-            Button(cadreRight,width=40,font=("arial","15")),#WordReference
-            Button(cadreRight,width=40,font=("arial","15")),#YtMusic
-            Button(cadreRight,width=40,font=("arial","15"))#Reverso
+            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Duckduckgo"),#duck
+            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Google"),#google
+            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Bing"),#Bing
+            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Brave"),#Brave
+            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Ecosia"),#Ecosia
+            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Qwant"),#Qwant
+            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Grande Recherche"),#bigSearch
+            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Wikipedia"),#Wikipedia
+            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Amazon"),#Amazon
+            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur WordReference"),#WordReference
+            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Youtube Music"),#YtMusic
+            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Reverso")#Reverso
         ]
         #Zone de texte
         self.__zoneEntrer = Entry(cadreSearch,bg="white",bd=0,font=("arial","13"),width=50,relief="solid", borderwidth=2)
@@ -50,7 +65,6 @@ class ArreraRecherche :
         #Calcule de passement
         largeurCadreLeft = cadreLeft.winfo_reqwidth()
         largeurcadreRight = cadreRight.winfo_reqwidth()
-        largeurBTN = (btnResult[1].winfo_reqheight()/2)
         #affichage
         #cadre
         cadreSearch.place(x=50,y=0)
