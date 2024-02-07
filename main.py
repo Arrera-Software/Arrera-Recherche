@@ -245,7 +245,7 @@ class ArreraRecherche :
         if (self.__objRecherche.getEtatInternet()==True):
             self.__guiSearch()
         else :
-            self.__guiSearch()   
+            self.__guiNoInternet()  
         self.__windows.mainloop()
 
 ArreraRecherche().boot()
