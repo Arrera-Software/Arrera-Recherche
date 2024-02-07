@@ -27,14 +27,20 @@ class ArreraRecherche :
         self.__windows.minsize(550,680)
         self.__windows.config(bg=self.__color)
         #Cadre
-        cadreSearch = Frame(self.__windows,bg=self.__color,width=500,height=70)
-        cadreLeft = Frame(self.__windows,bg=self.__secondColor,width=50,height=680)
-        cadreRight = Frame(self.__windows,bg=self.__color,width=500,height=610)
+        self.__cadreSearch = Frame(self.__windows,bg=self.__color,width=500,height=70)
+        self.__cadreLeft = Frame(self.__windows,bg=self.__secondColor,width=50,height=680)
+        self.__cadreRight = Frame(self.__windows,bg=self.__color,width=500,height=610)
+        self.__cadreParametre = Frame(self.__windows,bg="red",width=550,height=680)
+        self.__cardeHistorique = Frame(self.__windows,bg="yellow",width=550,height=680)
         #bouton
         #cadreLeft
-        btnHistorique = Button(cadreLeft,bg=self.__color)
-        btnParametre = Button(cadreLeft,bg=self.__color)
-        btnApropos = Button(cadreLeft,bg=self.__color,command=self.Apropop)
+        btnHistorique = Button(self.__cadreLeft,bg=self.__color,command=self.__historiqueGui)
+        btnParametre = Button(self.__cadreLeft,bg=self.__color,command=self.__settingGui)
+        btnApropos = Button(self.__cadreLeft,bg=self.__color,command=self.Apropop)
+        #cadreParametre
+        btnQuitterSetting = Button(self.__cadreParametre,text="Retour",bg=self.__color,fg=self.__textColor,command=self.__mainGUI,font=("Arial","15"))
+        #cardeHistorique
+        btnQuitterHistorique = Button(self.__cardeHistorique,text="Retour",bg=self.__color,fg=self.__textColor,command=self.__mainGUI,font=("Arial","15"))    
         #Image BTN
         imageAbout = Image.open("image/IconAbout.png")
         imageSetting = Image.open("image/para.png")
@@ -50,30 +56,32 @@ class ArreraRecherche :
         btnHistorique.configure(image=iconHistorique)
         #cadreRight
         btnResult = [
-            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Duckduckgo"),#duck
-            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Google"),#google
-            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Bing"),#Bing
-            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Brave"),#Brave
-            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Ecosia"),#Ecosia
-            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Qwant"),#Qwant
-            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Grande Recherche"),#bigSearch
-            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Wikipedia"),#Wikipedia
-            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Amazon"),#Amazon
-            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur WordReference"),#WordReference
-            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Youtube Music"),#YtMusic
-            Button(cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Reverso")#Reverso
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Duckduckgo"),#duck
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Google"),#google
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Bing"),#Bing
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Brave"),#Brave
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Ecosia"),#Ecosia
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Qwant"),#Qwant
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Grande Recherche"),#bigSearch
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Wikipedia"),#Wikipedia
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Amazon"),#Amazon
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur WordReference"),#WordReference
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Youtube Music"),#YtMusic
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Reverso")#Reverso
         ]
         #Zone de texte
-        self.__zoneEntrer = Entry(cadreSearch,bg="white",bd=0,font=("arial","13"),width=50,relief="solid", borderwidth=2)
+        self.__zoneEntrer = Entry(self.__cadreSearch,bg="white",bd=0,font=("arial","13"),width=50,relief="solid", borderwidth=2)
         
         #Calcule de passement
-        largeurCadreLeft = cadreLeft.winfo_reqwidth()
-        largeurcadreRight = cadreRight.winfo_reqwidth()
+        largeurCadreLeft = self.__cadreLeft.winfo_reqwidth()
+        largeurcadreRight = self.__cadreRight.winfo_reqwidth()
+        largeurcadreParametre = self.__cadreParametre.winfo_reqwidth()
+        hauteurcadreParametre = self.__cadreParametre.winfo_reqheight()
+        largeurcardeHistorique = self.__cardeHistorique.winfo_reqwidth()
+        hauteurcardeHistorique= self.__cardeHistorique.winfo_reqheight()
         #affichage
         #cadre
-        cadreSearch.place(x=50,y=0)
-        cadreLeft.place(x=0,y=0)
-        cadreRight.place(x=50,y=70)
+        
         #btnCadreLeft
         btnHistorique.place(x=((largeurCadreLeft-btnHistorique.winfo_reqwidth())//2),y=45)
         btnParametre.place(x=((largeurCadreLeft-btnParametre.winfo_reqwidth())//2),y=105)
@@ -91,9 +99,35 @@ class ArreraRecherche :
         btnResult[9].place(x=((largeurcadreRight-btnResult[0].winfo_reqwidth())//2),y=420)
         btnResult[10].place(x=((largeurcadreRight-btnResult[10].winfo_reqwidth())//2),y=465)
         btnResult[11].place(x=((largeurcadreRight-btnResult[11].winfo_reqwidth())//2),y=510)
+        #btncadreParametre
+        btnQuitterSetting.place(x=(largeurcadreParametre-btnQuitterSetting.winfo_reqwidth()),y=(hauteurcadreParametre-btnQuitterSetting.winfo_reqheight()))
+        #cardeHistorique
+        btnQuitterHistorique.place(x=(largeurcardeHistorique-btnQuitterHistorique.winfo_reqwidth()),y=(hauteurcardeHistorique-btnQuitterHistorique.winfo_reqheight()))
         #zone de texte
         self.__zoneEntrer.place(relx=0.5,rely=0.5,anchor="center")
+        self.__mainGUI()
         self.__getTouches(13)
+
+    def __mainGUI(self):
+        self.__cadreParametre.place_forget()
+        self.__cardeHistorique.place_forget()
+        self.__cadreSearch.place(x=50,y=0)
+        self.__cadreLeft.place(x=0,y=0)
+        self.__cadreRight.place(x=50,y=70)
+    
+    def __settingGui(self):
+        self.__cadreParametre.place(x=0,y=0)
+        self.__cardeHistorique.place_forget()
+        self.__cadreSearch.place_forget()
+        self.__cadreLeft.place_forget()
+        self.__cadreRight.place_forget()
+    
+    def __historiqueGui(self):
+        self.__cadreParametre.place_forget()
+        self.__cardeHistorique.place(x=0,y=0)
+        self.__cadreSearch.place_forget()
+        self.__cadreLeft.place_forget()
+        self.__cadreRight.place_forget()
 
     def __searchWordReference(self,requette:str):
         if requette :
