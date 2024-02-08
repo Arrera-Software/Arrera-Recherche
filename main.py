@@ -1,6 +1,6 @@
 from tkinter import*
 from ModuleInternet import*
-import os
+import platform
 from time import*
 from tkinter.messagebox import*
 from PIL import Image, ImageTk 
@@ -22,6 +22,22 @@ class jsonWork :
         writeFile = open(self.fichier, 'w', encoding='utf-8')
         dict[flag] = valeur
         json.dump(dict,writeFile,indent=2)
+
+class OS :
+    def __init__(self) :
+        self.os = platform.system()
+        
+    def osWindows(self):
+        if self.os == "Windows":
+           return True
+        else :
+            return False
+    
+    def osLinux(self):
+        if self.os == "Linux":
+            return True
+        else :
+            return False
 class ArreraRecherche :
     def __init__(self):
         self.__objRecherche = CNetWork()
@@ -32,6 +48,7 @@ class ArreraRecherche :
         self.__listTheme = ["Light","Dark"]
         self.__windows = Tk()
         self.__objPara = jsonWork("UserFile/config.json")
+        self.__objOS = OS()
         self.__windows.iconphoto(False,PhotoImage(file="image/ArreraRecherche.png"))
         self.__windows.title("Arrera Recherche")
         self.__windows.config(bg=self.__color)
@@ -149,7 +166,11 @@ class ArreraRecherche :
         #zone de texte
         self.__zoneEntrer.place(relx=0.5,rely=0.5,anchor="center")
         self.__mainGUI()
-        self.__getTouches(13)
+        if ((self.__objOS.osLinux() == False)and(self.__objOS.osWindows()== True)):
+            self.__getTouches(13)
+        else :
+            if ((self.__objOS.osLinux() == True)and(self.__objOS.osWindows() == False)):
+                self.__getTouches(36)
 
     def __mainGUI(self):
         self.__cadreParametre.place_forget()
