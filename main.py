@@ -41,9 +41,13 @@ class OS :
 class ArreraRecherche :
     def __init__(self):
         self.__objRecherche = CNetWork()
-        self.__color = "white"
-        self.__textColor = "black"
-        self.__secondColor =  "#9e9e9e"
+        self.__color = str
+        self.__textColor = str
+        self.__secondColor = str
+        self.__listSecondColor = ["#9e9e9e","#595959"]
+        self.__listColor = ["white","black"]
+        self.__listTextColor = ["black","white"]
+        
         self.__listMoteur = ["Google","Duckduckgo","Ecosia","Qwant","Bing","Brave"]
         self.__listTheme = ["Light","Dark"]
         self.__windows = Tk()
@@ -51,7 +55,7 @@ class ArreraRecherche :
         self.__objOS = OS()
         self.__windows.iconphoto(False,PhotoImage(file="image/ArreraRecherche.png"))
         self.__windows.title("Arrera Recherche")
-        self.__windows.config(bg=self.__color)
+        
         self.__nameApp = "Arrera Recherche"
         self.__versionApp = ""
         self.__imagePath = "image/ArreraRecherche.png"
@@ -59,24 +63,41 @@ class ArreraRecherche :
         self.__varMoteur = StringVar(self.__windows)
         self.__varTheme = StringVar(self.__windows)
     
+    def __setTheme(self):
+        if (self.__objPara.lectureJSON("theme")==self.__listTheme[0]):
+            self.__color = self.__listColor[0]
+            self.__textColor = self.__listTextColor[0]
+            self.__secondColor = self.__listSecondColor[0]
+        else :
+            if (self.__objPara.lectureJSON("theme")==self.__listTheme[1]):
+                self.__color = self.__listColor[1]
+                self.__textColor = self.__listTextColor[1]
+                self.__secondColor = self.__listSecondColor[1]
+        self.__windows.config(bg=self.__color)
+        self.__cadreSearch.configure(bg=self.__color)
+        self.__cadreLeft.configure(bg=self.__secondColor)
+        self.__cadreRight.configure(bg=self.__color)
+        self.__cadreParametre.configure(bg=self.__color)
+        self.__cardeHistorique.configure(bg=self.__color)
+
     def __guiSearch(self):
         #Fenetre
         self.__windows.iconphoto(False,PhotoImage(file=self.__imagePath))
         self.__windows.title(self.__nameApp)
         self.__windows.maxsize(550,680)
         self.__windows.minsize(550,680)
-        self.__windows.config(bg=self.__color)
         #Cadre
-        self.__cadreSearch = Frame(self.__windows,bg=self.__color,width=500,height=70)
-        self.__cadreLeft = Frame(self.__windows,bg=self.__secondColor,width=50,height=680)
-        self.__cadreRight = Frame(self.__windows,bg=self.__color,width=500,height=610)
-        self.__cadreParametre = Frame(self.__windows,bg=self.__color,width=550,height=680)
-        self.__cardeHistorique = Frame(self.__windows,bg="yellow",width=550,height=680)
+        self.__cadreSearch = Frame(self.__windows,width=500,height=70)
+        self.__cadreLeft = Frame(self.__windows,width=50,height=680)
+        self.__cadreRight = Frame(self.__windows,width=500,height=610)
+        self.__cadreParametre = Frame(self.__windows,width=550,height=680)
+        self.__cardeHistorique = Frame(self.__windows,width=550,height=680)
         #bouton
+        self.__setTheme()
         #cadreLeft
-        btnHistorique = Button(self.__cadreLeft,bg=self.__color,command=self.__historiqueGui)
-        btnParametre = Button(self.__cadreLeft,bg=self.__color,command=self.__settingGui)
-        btnApropos = Button(self.__cadreLeft,bg=self.__color,command=self.Apropop)
+        btnHistorique = Button(self.__cadreLeft,bg=self.__secondColor,command=self.__historiqueGui)
+        btnParametre = Button(self.__cadreLeft,bg=self.__secondColor,command=self.__settingGui)
+        btnApropos = Button(self.__cadreLeft,bg=self.__secondColor,command=self.Apropop)
         #cadreParametre
         cadreAffichageSetting = [
             Frame(self.__cadreParametre,bg=self.__color),
@@ -327,9 +348,9 @@ class ArreraRecherche :
         icon = ImageTk.PhotoImage(imageRedim,master=labelIcon)
         labelIcon.image_names = icon
         labelIcon.configure(image=icon)
-        labelName = Label(about,text="\n"+self.__nameApp+"\n",font=("arial","12"),bg=self.__color)
-        labelVersion = Label(about,text=self.__versionApp+"\n",font=("arial","11"),bg=self.__color)
-        labelCopyright = Label(about,text=self.__copyrightApp,font=("arial","9"),bg=self.__color)
+        labelName = Label(about,text="\n"+self.__nameApp+"\n",font=("arial","12"),bg=self.__color,fg=self.__textColor)
+        labelVersion = Label(about,text=self.__versionApp+"\n",font=("arial","11"),bg=self.__color,fg=self.__textColor)
+        labelCopyright = Label(about,text=self.__copyrightApp,font=("arial","9"),bg=self.__color,fg=self.__textColor)
         #affichage
         labelIcon.pack()
         labelName.pack()
