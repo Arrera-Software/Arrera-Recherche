@@ -4,13 +4,34 @@ import os
 from time import*
 from tkinter.messagebox import*
 from PIL import Image, ImageTk 
+import json
+
+class jsonWork : 
+    def __init__(self,file):
+        self.fichier = file
+    
+    def lectureJSON(self,flag): # Permet de lire la valeur du flag defini a l'appel de la fonction
+        with open(self.fichier, 'r' , encoding='utf-8') as openfile:
+            dict = json.load(openfile)[flag]
+        return str(dict)
+
+    def EcritureJSON(self,flag,valeur):#Permet d'ecrire une nouvelle valeur a flag definie
+        openfile = open(self.fichier, 'r' , encoding='utf-8')
+        dict = json.load(openfile)
+        openfile.close()
+        writeFile = open(self.fichier, 'w', encoding='utf-8')
+        dict[flag] = valeur
+        json.dump(dict,writeFile,indent=2)
 class ArreraRecherche :
     def __init__(self):
         self.__objRecherche = CNetWork()
         self.__color = "white"
         self.__textColor = "black"
         self.__secondColor =  "#9e9e9e"
+        self.__listMoteur = ["Google","Duckduckgo","Ecosia","Qwant","Bing","Brave"]
+        self.__listTheme = ["Light","Dark"]
         self.__windows = Tk()
+        self.__objPara = jsonWork("UserFile/config.json")
         self.__windows.iconphoto(False,PhotoImage(file="image/ArreraRecherche.png"))
         self.__windows.title("Arrera Recherche")
         self.__windows.config(bg=self.__color)
@@ -18,6 +39,8 @@ class ArreraRecherche :
         self.__versionApp = ""
         self.__imagePath = "image/ArreraRecherche.png"
         self.__copyrightApp = "Copyright Arrera Software by Baptiste P 2023-2024"
+        self.__varMoteur = StringVar(self.__windows)
+        self.__varTheme = StringVar(self.__windows)
     
     def __guiSearch(self):
         #Fenetre
@@ -30,7 +53,7 @@ class ArreraRecherche :
         self.__cadreSearch = Frame(self.__windows,bg=self.__color,width=500,height=70)
         self.__cadreLeft = Frame(self.__windows,bg=self.__secondColor,width=50,height=680)
         self.__cadreRight = Frame(self.__windows,bg=self.__color,width=500,height=610)
-        self.__cadreParametre = Frame(self.__windows,bg="red",width=550,height=680)
+        self.__cadreParametre = Frame(self.__windows,bg=self.__color,width=550,height=680)
         self.__cardeHistorique = Frame(self.__windows,bg="yellow",width=550,height=680)
         #bouton
         #cadreLeft
@@ -38,6 +61,17 @@ class ArreraRecherche :
         btnParametre = Button(self.__cadreLeft,bg=self.__color,command=self.__settingGui)
         btnApropos = Button(self.__cadreLeft,bg=self.__color,command=self.Apropop)
         #cadreParametre
+        cadreAffichageSetting = [
+            Frame(self.__cadreParametre,bg=self.__color),
+            Frame(self.__cadreParametre,bg=self.__color)
+        ]
+        labelIndicationSetting =  [
+            Label(cadreAffichageSetting[0],text="Moteur de recherche par default : ",bg=self.__color,fg=self.__textColor,font=("Arial","15")),
+            Label(cadreAffichageSetting[1],text="Theme de l'application : ",bg=self.__color,fg=self.__textColor,font=("Arial","15"))
+        ]
+        menuListMoteur = OptionMenu(cadreAffichageSetting[0],self.__varMoteur,*self.__listMoteur)
+        menuListTheme = OptionMenu(cadreAffichageSetting[1],self.__varTheme,*self.__listTheme)
+        btnValiderSetting = Button(self.__cadreParametre,text="Valider",bg=self.__color,fg=self.__textColor,font=("Arial","15"),width=20,command=self.__validerSetting)
         btnQuitterSetting = Button(self.__cadreParametre,text="Retour",bg=self.__color,fg=self.__textColor,command=self.__mainGUI,font=("Arial","15"))
         #cardeHistorique
         btnQuitterHistorique = Button(self.__cardeHistorique,text="Retour",bg=self.__color,fg=self.__textColor,command=self.__mainGUI,font=("Arial","15"))    
@@ -75,8 +109,10 @@ class ArreraRecherche :
         #Calcule de passement
         largeurCadreLeft = self.__cadreLeft.winfo_reqwidth()
         largeurcadreRight = self.__cadreRight.winfo_reqwidth()
+
         largeurcadreParametre = self.__cadreParametre.winfo_reqwidth()
         hauteurcadreParametre = self.__cadreParametre.winfo_reqheight()
+
         largeurcardeHistorique = self.__cardeHistorique.winfo_reqwidth()
         hauteurcardeHistorique= self.__cardeHistorique.winfo_reqheight()
         #affichage
@@ -100,6 +136,13 @@ class ArreraRecherche :
         btnResult[10].place(x=((largeurcadreRight-btnResult[10].winfo_reqwidth())//2),y=465)
         btnResult[11].place(x=((largeurcadreRight-btnResult[11].winfo_reqwidth())//2),y=510)
         #btncadreParametre
+        labelIndicationSetting[0].pack(side="left")
+        labelIndicationSetting[1].pack(side="left")
+        menuListMoteur.pack(side="right")
+        menuListTheme.pack(side="right")
+        cadreAffichageSetting[0].place(x=15,y=100)
+        cadreAffichageSetting[1].place(x=15,y=200)
+        btnValiderSetting.place(x=((largeurcadreParametre-btnValiderSetting.winfo_reqwidth())//2),y=400)
         btnQuitterSetting.place(x=(largeurcadreParametre-btnQuitterSetting.winfo_reqwidth()),y=(hauteurcadreParametre-btnQuitterSetting.winfo_reqheight()))
         #cardeHistorique
         btnQuitterHistorique.place(x=(largeurcardeHistorique-btnQuitterHistorique.winfo_reqwidth()),y=(hauteurcardeHistorique-btnQuitterHistorique.winfo_reqheight()))
@@ -128,6 +171,11 @@ class ArreraRecherche :
         self.__cadreSearch.place_forget()
         self.__cadreLeft.place_forget()
         self.__cadreRight.place_forget()
+    
+    def __validerSetting(self):
+        self.__objPara.EcritureJSON("moteur",self.__varMoteur.get())
+        self.__objPara.EcritureJSON("theme",self.__varTheme.get())
+        self.__mainGUI()
 
     def __searchWordReference(self,requette:str):
         if requette :
@@ -207,33 +255,26 @@ class ArreraRecherche :
         label=Label(self.__windows,text="Pas d'acces a internet",font=("arial",30),bg="black",fg="white").pack()
 
     def __valider(self,requette:str):
+        #self.__listMoteur = ["Google","Duckduckgo","Ecosia","Qwant","Bing","Brave"]
+        parametre = self.__objPara.lectureJSON("moteur")
         if requette :
-            test = requette[:1]
-            if test == "@":
-                flag =  requette[:3]
-                recherche = requette[3:]
-                if flag == "@gg":
-                    self.__searchgoogle(recherche)
-                else :
-                    if flag == "@ec":
-                        self.__searchEcosia(recherche)
-                    else:
-                        if flag == "@qw":
-                            self.__searchQwant(recherche)
-                        else :
-                            if flag == "@bg":
-                                self.__searchBing(recherche)
-                            else :
-                                if flag == "@br":
-                                    self.__searchBrave(recherche)
-                                else :
-                                    if flag == "@gr":
-                                        self.__bigSearch(recherche)
-                                    else:
-                                        if flag == "@am":
-                                            self.__searchAmazon(recherche)
+            if parametre == self.__listMoteur[0]:
+                self.__objRecherche.googleSearch(requette)
             else :
-                self.__objRecherche.duckduckgoSearch(requette)
+                if parametre == self.__listMoteur[1]:
+                    self.__objRecherche.duckduckgoSearch(requette)
+                else :
+                    if parametre == self.__listMoteur[2]:
+                        self.__objRecherche.EcosiaSearch(requette)
+                    else :
+                        if parametre == self.__listMoteur[3]:
+                            self.__objRecherche.QwantSearch(requette)
+                        else :
+                            if parametre == self.__listMoteur[4]:
+                                self.__objRecherche.bingSearch(requette)
+                            else :
+                                if parametre == self.__listMoteur[5]:
+                                    self.__objRecherche.braveSearch(requette)
         else :
             showerror("Erreur","Aucune recherche n'a ete taper")
     
