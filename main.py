@@ -128,18 +128,18 @@ class ArreraRecherche :
         btnHistorique.configure(image=iconHistorique)
         #cadreRight
         btnResult = [
-            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Duckduckgo"),#duck
-            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Google"),#google
-            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Bing"),#Bing
-            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Brave"),#Brave
-            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Ecosia"),#Ecosia
-            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Qwant"),#Qwant
-            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Grande Recherche"),#bigSearch
-            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Wikipedia"),#Wikipedia
-            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Amazon"),#Amazon
-            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur WordReference"),#WordReference
-            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Youtube Music"),#YtMusic
-            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Reverso")#Reverso
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Duckduckgo",command=lambda : self.__searchDuckduckgo(self.__getRecherche())),#duck
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Google",command=lambda : self.__searchgoogle(self.__getRecherche())),#google
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Bing",command=lambda : self.__searchBing(self.__getRecherche())),#Bing
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Brave",command=lambda : self.__searchBrave(self.__getRecherche())),#Brave
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Ecosia",command=lambda : self.__searchEcosia(self.__getRecherche())),#Ecosia
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Qwant",command=lambda : self.__searchQwant(self.__getRecherche())),#Qwant
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Grande Recherche",command=lambda : self.__bigSearch(self.__getRecherche())),#bigSearch
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Wikipedia",command=lambda : self.__searchWikipedia(self.__getRecherche())),#Wikipedia
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Amazon",command=lambda : self.__searchAmazon(self.__getRecherche())),#Amazon
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur WordReference",command=lambda : self.__searchWordReference(self.__getRecherche())),#WordReference
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Youtube Music",command=lambda : self.__searchYtMusic(self.__getRecherche())),#YtMusic
+            Button(self.__cadreRight,width=40,font=("arial","15"),bg=self.__color,fg=self.__textColor,text="Resultat sur Reverso",command=lambda : self.__searchReverso(self.__getRecherche()))#Reverso
         ]
         #Zone de texte
         self.__zoneEntrer = Entry(self.__cadreSearch,bg="white",bd=0,font=("arial","13"),width=50,relief="solid", borderwidth=2)
