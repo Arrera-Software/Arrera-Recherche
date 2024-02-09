@@ -294,7 +294,14 @@ class ArreraRecherche :
     def __guiNoInternet(self):
         self.__windows.maxsize(525,70)
         self.__windows.minsize(525,70)
-        label=Label(self.__windows,text="Pas d'acces a internet",font=("arial",30),bg="black",fg="white").pack()
+        if (self.__objPara.lectureJSON("theme")==self.__listTheme[0]):
+            Label(self.__windows,text="Pas d'acces a internet",font=("arial",30),bg=self.__listColor[0],fg=self.__listTextColor[0]).pack()
+            self.__windows.configure(bg=self.__listColor[0])
+        else :
+            if (self.__objPara.lectureJSON("theme")==self.__listTheme[1]):
+                Label(self.__windows,text="Pas d'acces a internet",font=("arial",30),bg=self.__listColor[1],fg=self.__listTextColor[1]).pack()
+                self.__windows.configure(bg=self.__listColor[1])
+        
 
     def __valider(self,requette:str):
         #self.__listMoteur = ["Google","Duckduckgo","Ecosia","Qwant","Bing","Brave"]
