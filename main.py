@@ -62,6 +62,12 @@ class ArreraRecherche :
         self.__copyrightApp = "Copyright Arrera Software by Baptiste P 2023-2024"
         self.__varMoteur = StringVar(self.__windows)
         self.__varTheme = StringVar(self.__windows)
+        #Creation de cardre
+        self.__cadreSearch = Frame(self.__windows,width=500,height=70)
+        self.__cadreLeft = Frame(self.__windows,width=50,height=680)
+        self.__cadreRight = Frame(self.__windows,width=500,height=610)
+        self.__cadreParametre = Frame(self.__windows,width=550,height=680)
+        self.__cardeHistorique = Frame(self.__windows,width=550,height=680)
     
     def __setTheme(self):
         if (self.__objPara.lectureJSON("theme")==self.__listTheme[0]):
@@ -87,30 +93,12 @@ class ArreraRecherche :
         self.__windows.maxsize(550,680)
         self.__windows.minsize(550,680)
         #Cadre
-        self.__cadreSearch = Frame(self.__windows,width=500,height=70)
-        self.__cadreLeft = Frame(self.__windows,width=50,height=680)
-        self.__cadreRight = Frame(self.__windows,width=500,height=610)
-        self.__cadreParametre = Frame(self.__windows,width=550,height=680)
-        self.__cardeHistorique = Frame(self.__windows,width=550,height=680)
         #bouton
         self.__setTheme()
         #cadreLeft
         btnHistorique = Button(self.__cadreLeft,bg=self.__secondColor,command=self.__historiqueGui)
         btnParametre = Button(self.__cadreLeft,bg=self.__secondColor,command=self.__settingGui)
         btnApropos = Button(self.__cadreLeft,bg=self.__secondColor,command=self.Apropop)
-        #cadreParametre
-        cadreAffichageSetting = [
-            Frame(self.__cadreParametre,bg=self.__color),
-            Frame(self.__cadreParametre,bg=self.__color)
-        ]
-        labelIndicationSetting =  [
-            Label(cadreAffichageSetting[0],text="Moteur de recherche par default : ",bg=self.__color,fg=self.__textColor,font=("Arial","15")),
-            Label(cadreAffichageSetting[1],text="Theme de l'application : ",bg=self.__color,fg=self.__textColor,font=("Arial","15"))
-        ]
-        menuListMoteur = OptionMenu(cadreAffichageSetting[0],self.__varMoteur,*self.__listMoteur)
-        menuListTheme = OptionMenu(cadreAffichageSetting[1],self.__varTheme,*self.__listTheme)
-        btnValiderSetting = Button(self.__cadreParametre,text="Valider",bg=self.__color,fg=self.__textColor,font=("Arial","15"),width=20,command=self.__validerSetting)
-        btnQuitterSetting = Button(self.__cadreParametre,text="Retour",bg=self.__color,fg=self.__textColor,command=self.__mainGUI,font=("Arial","15"))
         #cardeHistorique
         btnQuitterHistorique = Button(self.__cardeHistorique,text="Retour",bg=self.__color,fg=self.__textColor,command=self.__mainGUI,font=("Arial","15"))    
         #Image BTN
@@ -148,8 +136,6 @@ class ArreraRecherche :
         largeurCadreLeft = self.__cadreLeft.winfo_reqwidth()
         largeurcadreRight = self.__cadreRight.winfo_reqwidth()
 
-        largeurcadreParametre = self.__cadreParametre.winfo_reqwidth()
-        hauteurcadreParametre = self.__cadreParametre.winfo_reqheight()
 
         largeurcardeHistorique = self.__cardeHistorique.winfo_reqwidth()
         hauteurcardeHistorique= self.__cardeHistorique.winfo_reqheight()
@@ -173,15 +159,7 @@ class ArreraRecherche :
         btnResult[9].place(x=((largeurcadreRight-btnResult[0].winfo_reqwidth())//2),y=420)
         btnResult[10].place(x=((largeurcadreRight-btnResult[10].winfo_reqwidth())//2),y=465)
         btnResult[11].place(x=((largeurcadreRight-btnResult[11].winfo_reqwidth())//2),y=510)
-        #btncadreParametre
-        labelIndicationSetting[0].pack(side="left")
-        labelIndicationSetting[1].pack(side="left")
-        menuListMoteur.pack(side="right")
-        menuListTheme.pack(side="right")
-        cadreAffichageSetting[0].place(x=15,y=100)
-        cadreAffichageSetting[1].place(x=15,y=200)
-        btnValiderSetting.place(x=((largeurcadreParametre-btnValiderSetting.winfo_reqwidth())//2),y=400)
-        btnQuitterSetting.place(x=(largeurcadreParametre-btnQuitterSetting.winfo_reqwidth()),y=(hauteurcadreParametre-btnQuitterSetting.winfo_reqheight()))
+        
         #cardeHistorique
         btnQuitterHistorique.place(x=(largeurcardeHistorique-btnQuitterHistorique.winfo_reqwidth()),y=(hauteurcardeHistorique-btnQuitterHistorique.winfo_reqheight()))
         #zone de texte
@@ -193,6 +171,33 @@ class ArreraRecherche :
             if ((self.__objOS.osLinux() == True)and(self.__objOS.osWindows() == False)):
                 self.__getTouches(36)
 
+    def __guiParametre(self):
+        #cadreParametre
+        cadreAffichageSetting = [
+            Frame(self.__cadreParametre,bg=self.__color),
+            Frame(self.__cadreParametre,bg=self.__color)
+        ]
+        labelIndicationSetting =  [
+            Label(cadreAffichageSetting[0],text="Moteur de recherche par default : ",bg=self.__color,fg=self.__textColor,font=("Arial","15")),
+            Label(cadreAffichageSetting[1],text="Theme de l'application : ",bg=self.__color,fg=self.__textColor,font=("Arial","15"))
+        ]
+        menuListMoteur = OptionMenu(cadreAffichageSetting[0],self.__varMoteur,*self.__listMoteur)
+        menuListTheme = OptionMenu(cadreAffichageSetting[1],self.__varTheme,*self.__listTheme)
+        btnValiderSetting = Button(self.__cadreParametre,text="Valider",bg=self.__color,fg=self.__textColor,font=("Arial","15"),width=20,command=self.__validerSetting)
+        btnQuitterSetting = Button(self.__cadreParametre,text="Retour",bg=self.__color,fg=self.__textColor,command=self.__mainGUI,font=("Arial","15"))
+        #Recuperation dimension
+        largeurcadreParametre = self.__cadreParametre.winfo_reqwidth()
+        hauteurcadreParametre = self.__cadreParametre.winfo_reqheight()
+        #btncadreParametre
+        labelIndicationSetting[0].pack(side="left")
+        labelIndicationSetting[1].pack(side="left")
+        menuListMoteur.pack(side="right")
+        menuListTheme.pack(side="right")
+        cadreAffichageSetting[0].place(x=15,y=100)
+        cadreAffichageSetting[1].place(x=15,y=200)
+        btnValiderSetting.place(x=((largeurcadreParametre-btnValiderSetting.winfo_reqwidth())//2),y=400)
+        btnQuitterSetting.place(x=(largeurcadreParametre-btnQuitterSetting.winfo_reqwidth()),y=(hauteurcadreParametre-btnQuitterSetting.winfo_reqheight()))
+
     def __mainGUI(self):
         self.__cadreParametre.place_forget()
         self.__cardeHistorique.place_forget()
@@ -201,6 +206,7 @@ class ArreraRecherche :
         self.__cadreRight.place(x=50,y=70)
     
     def __settingGui(self):
+        self.__guiParametre()
         self.__cadreParametre.place(x=0,y=0)
         self.__cardeHistorique.place_forget()
         self.__cadreSearch.place_forget()
@@ -217,6 +223,7 @@ class ArreraRecherche :
     def __validerSetting(self):
         self.__objPara.EcritureJSON("moteur",self.__varMoteur.get())
         self.__objPara.EcritureJSON("theme",self.__varTheme.get())
+        self.__guiSearch()
         self.__mainGUI()
 
     def __searchWordReference(self,requette:str):
