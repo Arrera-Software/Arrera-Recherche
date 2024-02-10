@@ -202,7 +202,7 @@ class ArreraRecherche :
         ]
         menuListMoteur = OptionMenu(cadreAffichageSetting[0],self.__varMoteur,*self.__listMoteur)
         menuListTheme = OptionMenu(cadreAffichageSetting[1],self.__varTheme,*self.__listTheme)
-        btnResetHist = Button(self.__cadreParametre,text="Reset",bg=self.__color,fg=self.__textColor,font=("Arial","15"),width=20 )
+        btnResetHist = Button(self.__cadreParametre,text="Reset",bg=self.__color,fg=self.__textColor,font=("Arial","15"),width=20,command=self.__resetHistorqueSetting)
         btnValiderSetting = Button(self.__cadreParametre,text="Valider",bg=self.__color,fg=self.__textColor,font=("Arial","15"),width=20,command=self.__validerSetting)
         btnQuitterSetting = Button(self.__cadreParametre,text="Retour",bg=self.__color,fg=self.__textColor,command=self.__mainGUI,font=("Arial","15"))
         #Recuperation dimension
@@ -259,8 +259,9 @@ class ArreraRecherche :
         self.__guiSearch()
         self.__mainGUI()
     
-    def resetHistorqueSetting(self):
+    def __resetHistorqueSetting(self):
         self.__objHistorique.suppr()
+        self.__mainGUI()
         showinfo("Historique effacer","Votre historique a ete efacer")
 
     def __searchWordReference(self,requette:str):
