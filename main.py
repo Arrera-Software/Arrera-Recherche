@@ -75,7 +75,7 @@ class ArreraRecherche :
         self.__windows.title("Arrera Recherche")
         
         self.__nameApp = "Arrera Recherche"
-        self.__versionApp = ""
+        self.__versionApp = "I2024-1.00"
         self.__imagePath = "image/ArreraRecherche.png"
         self.__copyrightApp = "Copyright Arrera Software by Baptiste P 2023-2024"
         self.__varMoteur = StringVar(self.__windows)
