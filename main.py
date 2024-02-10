@@ -23,6 +23,23 @@ class jsonWork :
         dict[flag] = valeur
         json.dump(dict,writeFile,indent=2)
 
+class historique:
+    def __init__(self, nameFile:str):
+        self.__fileName = nameFile
+
+    def write(self, contenu):
+        with open(self.__fileName, 'a') as fichier:
+            fichier.write(contenu + '\n')
+
+    def read(self)->list:
+        with open(self.__fileName, 'r') as fichier:
+            lignes = fichier.readlines()
+            return lignes
+
+    def suppr(self):
+        with open(self.__fileName, 'w') as fichier:
+            fichier.truncate(0)
+
 class OS :
     def __init__(self) :
         self.os = platform.system()
@@ -53,6 +70,7 @@ class ArreraRecherche :
         self.__windows = Tk()
         self.__objPara = jsonWork("UserFile/config.json")
         self.__objOS = OS()
+        self.__objHistorique = historique("UserFile/historique.txt")
         self.__windows.iconphoto(False,PhotoImage(file="image/ArreraRecherche.png"))
         self.__windows.title("Arrera Recherche")
         
@@ -100,6 +118,7 @@ class ArreraRecherche :
         btnParametre = Button(self.__cadreLeft,bg=self.__secondColor,command=self.__settingGui)
         btnApropos = Button(self.__cadreLeft,bg=self.__secondColor,command=self.Apropop)
         #cardeHistorique
+        self.__labelHisto = Label(self.__cardeHistorique,bg=self.__color,fg=self.__textColor,font=("arial","13"), justify="left")
         btnQuitterHistorique = Button(self.__cardeHistorique,text="Retour",bg=self.__color,fg=self.__textColor,command=self.__mainGUI,font=("Arial","15"))    
         #Image BTN
         imageAbout = Image.open("image/IconAbout.png")
@@ -183,6 +202,7 @@ class ArreraRecherche :
         ]
         menuListMoteur = OptionMenu(cadreAffichageSetting[0],self.__varMoteur,*self.__listMoteur)
         menuListTheme = OptionMenu(cadreAffichageSetting[1],self.__varTheme,*self.__listTheme)
+        btnResetHist = Button(self.__cadreParametre,text="Reset",bg=self.__color,fg=self.__textColor,font=("Arial","15"),width=20 )
         btnValiderSetting = Button(self.__cadreParametre,text="Valider",bg=self.__color,fg=self.__textColor,font=("Arial","15"),width=20,command=self.__validerSetting)
         btnQuitterSetting = Button(self.__cadreParametre,text="Retour",bg=self.__color,fg=self.__textColor,command=self.__mainGUI,font=("Arial","15"))
         #Recuperation dimension
@@ -195,7 +215,8 @@ class ArreraRecherche :
         menuListTheme.pack(side="right")
         cadreAffichageSetting[0].place(x=15,y=100)
         cadreAffichageSetting[1].place(x=15,y=200)
-        btnValiderSetting.place(x=((largeurcadreParametre-btnValiderSetting.winfo_reqwidth())//2),y=400)
+        btnResetHist.place(x=((largeurcadreParametre-btnValiderSetting.winfo_reqwidth())//2),y=400)
+        btnValiderSetting.place(x=((largeurcadreParametre-btnValiderSetting.winfo_reqwidth())//2),y=450)
         btnQuitterSetting.place(x=(largeurcadreParametre-btnQuitterSetting.winfo_reqwidth()),y=(hauteurcadreParametre-btnQuitterSetting.winfo_reqheight()))
 
     def __mainGUI(self):
@@ -214,8 +235,20 @@ class ArreraRecherche :
         self.__cadreRight.place_forget()
     
     def __historiqueGui(self):
+        listHistorique = self.__objHistorique.read()
+        longeur = len(listHistorique)
+        if (longeur>16):
+            debut = longeur-16
+        else:
+            debut = 0
+        self.__labelHisto.configure(text="Historique : \n")
+        for i in range(debut,longeur):
+            contenu = self.__labelHisto.cget("text")
+            newText = contenu + " - "+listHistorique[i]+"\n"
+            self.__labelHisto.configure(text=newText)
         self.__cadreParametre.place_forget()
         self.__cardeHistorique.place(x=0,y=0)
+        self.__labelHisto.place(x=0,y=0)
         self.__cadreSearch.place_forget()
         self.__cadreLeft.place_forget()
         self.__cadreRight.place_forget()
@@ -225,6 +258,10 @@ class ArreraRecherche :
         self.__objPara.EcritureJSON("theme",self.__varTheme.get())
         self.__guiSearch()
         self.__mainGUI()
+    
+    def resetHistorqueSetting(self):
+        self.__objHistorique.suppr()
+        showinfo("Historique effacer","Votre historique a ete efacer")
 
     def __searchWordReference(self,requette:str):
         if requette :
@@ -336,6 +373,7 @@ class ArreraRecherche :
     
     def __getRecherche(self)->str:
         sortie = self.__zoneEntrer.get()
+        self.__objHistorique.write(sortie)
         self.__zoneEntrer.delete(0,END)
         return sortie
 
@@ -380,3 +418,8 @@ class ArreraRecherche :
         self.__windows.mainloop()
 
 ArreraRecherche().boot()
+"""
+file = historique("UserFile/historique.txt")
+for i in range(0,100):
+    file.write(str(i))
+"""
