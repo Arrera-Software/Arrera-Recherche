@@ -374,7 +374,8 @@ class ArreraRecherche :
     
     def __getRecherche(self)->str:
         sortie = self.__zoneEntrer.get()
-        self.__objHistorique.write(sortie)
+        if sortie :
+            self.__objHistorique.write(sortie)
         self.__zoneEntrer.delete(0,END)
         return sortie
 
