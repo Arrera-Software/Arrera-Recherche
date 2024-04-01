@@ -17,6 +17,31 @@ public:
     CUIRecherche(QWidget *parent = nullptr);
     ~CUIRecherche();
 
+private slots:
+    void on_IDC_DUCKDUCKGO_clicked();
+
+    void on_IDC_GOOGLE_clicked();
+
+    void on_IDC_BING_clicked();
+
+    void on_IDC_BRAVE_clicked();
+
+    void on_IDC_ECOSIA_clicked();
+
+    void on_IDC_QWANT_clicked();
+
+    void on_IDC_GRECHERCHE_clicked();
+
+    void on_IDC_WIKIPEDIA_clicked();
+
+    void on_IDC_AMAZON_clicked();
+
+    void on_IDC_WORKREFERENCE_clicked();
+
+    void on_IDC_YTMUSIC_clicked();
+
+    void on_IDC_REVERSO_clicked();
+
 private:
     Ui::CUIRecherche *ui;
 };
