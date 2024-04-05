@@ -5,6 +5,7 @@ class CArreraRecheche
 {
 public:
     CArreraRecheche();
+
 };
 
 #endif // CARRERARECHECHE_H
