@@ -2,6 +2,7 @@
 #define CUIRECHERCHE_H
 
 #include <QMainWindow>
+#include "carrerarecheche.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -44,5 +45,6 @@ private slots:
 
 private:
     Ui::CUIRecherche *ui;
+    CArreraRecheche arecherche;
 };
 #endif // CUIRECHERCHE_H

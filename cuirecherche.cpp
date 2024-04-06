@@ -9,6 +9,7 @@ CUIRecherche::CUIRecherche(QWidget *parent)
     , ui(new Ui::CUIRecherche)
 {
     ui->setupUi(this);
+    arecherche = CArreraRecheche();
 }
 
 CUIRecherche::~CUIRecherche()
@@ -19,6 +20,7 @@ CUIRecherche::~CUIRecherche()
 void CUIRecherche::on_IDC_DUCKDUCKGO_clicked()
 {
     QString query = ui->IDC_RECHERCHE->toPlainText();
+    arecherche.searchDuckduckgo(query);
     ui->IDC_RECHERCHE->setText("");
 }
 
@@ -26,6 +28,7 @@ void CUIRecherche::on_IDC_DUCKDUCKGO_clicked()
 void CUIRecherche::on_IDC_GOOGLE_clicked()
 {
     QString query = ui->IDC_RECHERCHE->toPlainText();
+    arecherche.searchGoogle(query);
     ui->IDC_RECHERCHE->setText("");
 }
 
@@ -33,6 +36,7 @@ void CUIRecherche::on_IDC_GOOGLE_clicked()
 void CUIRecherche::on_IDC_BING_clicked()
 {
     QString query = ui->IDC_RECHERCHE->toPlainText();
+    arecherche.searchBing(query);
     ui->IDC_RECHERCHE->setText("");
 }
 
@@ -40,6 +44,7 @@ void CUIRecherche::on_IDC_BING_clicked()
 void CUIRecherche::on_IDC_BRAVE_clicked()
 {
     QString query = ui->IDC_RECHERCHE->toPlainText();
+    arecherche.searchBrave(query);
     ui->IDC_RECHERCHE->setText("");
 }
 
@@ -47,6 +52,7 @@ void CUIRecherche::on_IDC_BRAVE_clicked()
 void CUIRecherche::on_IDC_ECOSIA_clicked()
 {
     QString query = ui->IDC_RECHERCHE->toPlainText();
+    arecherche.searchEcosia(query);
     ui->IDC_RECHERCHE->setText("");
 }
 
@@ -54,6 +60,7 @@ void CUIRecherche::on_IDC_ECOSIA_clicked()
 void CUIRecherche::on_IDC_QWANT_clicked()
 {
     QString query = ui->IDC_RECHERCHE->toPlainText();
+    arecherche.searchQwant(query);
     ui->IDC_RECHERCHE->setText("");
 }
 
@@ -61,6 +68,7 @@ void CUIRecherche::on_IDC_QWANT_clicked()
 void CUIRecherche::on_IDC_GRECHERCHE_clicked()
 {
     QString query = ui->IDC_RECHERCHE->toPlainText();
+    arecherche.searchAll(query);
     ui->IDC_RECHERCHE->setText("");
 }
 
@@ -68,6 +76,7 @@ void CUIRecherche::on_IDC_GRECHERCHE_clicked()
 void CUIRecherche::on_IDC_WIKIPEDIA_clicked()
 {
     QString query = ui->IDC_RECHERCHE->toPlainText();
+    arecherche.searchWikipedia(query);
     ui->IDC_RECHERCHE->setText("");
 }
 
@@ -75,6 +84,7 @@ void CUIRecherche::on_IDC_WIKIPEDIA_clicked()
 void CUIRecherche::on_IDC_AMAZON_clicked()
 {
     QString query = ui->IDC_RECHERCHE->toPlainText();
+    arecherche.searchAmazon(query);
     ui->IDC_RECHERCHE->setText("");
 }
 
@@ -82,6 +92,7 @@ void CUIRecherche::on_IDC_AMAZON_clicked()
 void CUIRecherche::on_IDC_WORKREFERENCE_clicked()
 {
     QString query = ui->IDC_RECHERCHE->toPlainText();
+    arecherche.searchWordreference(query);
     ui->IDC_RECHERCHE->setText("");
 }
 
@@ -89,6 +100,7 @@ void CUIRecherche::on_IDC_WORKREFERENCE_clicked()
 void CUIRecherche::on_IDC_YTMUSIC_clicked()
 {
     QString query = ui->IDC_RECHERCHE->toPlainText();
+    arecherche.searchYTmusic(query);
     ui->IDC_RECHERCHE->setText("");
 }
 
@@ -96,6 +108,7 @@ void CUIRecherche::on_IDC_YTMUSIC_clicked()
 void CUIRecherche::on_IDC_REVERSO_clicked()
 {
     QString query = ui->IDC_RECHERCHE->toPlainText();
+    arecherche.searchReverso(query);
     ui->IDC_RECHERCHE->setText("");
 }
 
