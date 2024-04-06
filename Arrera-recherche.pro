@@ -9,15 +9,18 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    carreraapropos.cpp \
     carrerarecheche.cpp \
     main.cpp \
     cuirecherche.cpp
 
 HEADERS += \
+    carreraapropos.h \
     carrerarecheche.h \
     cuirecherche.h
 
 FORMS += \
+    carreraapropos.ui \
     cuirecherche.ui
 
 # Default rules for deployment.

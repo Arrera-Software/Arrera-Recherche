@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "carrerarecheche.h"
+#include "carreraapropos.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -43,8 +44,11 @@ private slots:
 
     void on_IDC_REVERSO_clicked();
 
+    void on_IDC_APROPOS_clicked();
+
 private:
     Ui::CUIRecherche *ui;
     CArreraRecheche arecherche;
+    CArreraApropos* wApropos;
 };
 #endif // CUIRECHERCHE_H

@@ -10,6 +10,8 @@ CUIRecherche::CUIRecherche(QWidget *parent)
 {
     ui->setupUi(this);
     arecherche = CArreraRecheche();
+    wApropos = new CArreraApropos(this);
+    connect(this,&CUIRecherche::destroyed,wApropos,&CUIRecherche::close);
 }
 
 CUIRecherche::~CUIRecherche()
@@ -110,5 +112,11 @@ void CUIRecherche::on_IDC_REVERSO_clicked()
     QString query = ui->IDC_RECHERCHE->toPlainText();
     arecherche.searchReverso(query);
     ui->IDC_RECHERCHE->setText("");
+}
+
+
+void CUIRecherche::on_IDC_APROPOS_clicked()
+{
+    wApropos->show();
 }
 
