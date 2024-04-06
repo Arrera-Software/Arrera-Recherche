@@ -46,6 +46,10 @@ private slots:
 
     void on_IDC_APROPOS_clicked();
 
+    void on_IDC_RETOURMAIN_clicked();
+
+    void on_IDC_PARA_clicked();
+
 private:
     Ui::CUIRecherche *ui;
     CArreraRecheche arecherche;

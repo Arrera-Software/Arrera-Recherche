@@ -11,6 +11,7 @@ CUIRecherche::CUIRecherche(QWidget *parent)
     ui->setupUi(this);
     arecherche = CArreraRecheche();
     wApropos = new CArreraApropos(this);
+    ui->FPARAMETRE->setVisible(false);
     connect(this,&CUIRecherche::destroyed,wApropos,&CUIRecherche::close);
 }
 
@@ -118,5 +119,21 @@ void CUIRecherche::on_IDC_REVERSO_clicked()
 void CUIRecherche::on_IDC_APROPOS_clicked()
 {
     wApropos->show();
+}
+
+
+void CUIRecherche::on_IDC_RETOURMAIN_clicked()
+{
+    ui->FPARAMETRE->setVisible(false);
+    ui->FRECHERCHE->setVisible(true);
+    ui->FBTN->setVisible(true);
+}
+
+
+void CUIRecherche::on_IDC_PARA_clicked()
+{
+    ui->FRECHERCHE->setVisible(false);
+    ui->FBTN->setVisible(false);
+    ui->FPARAMETRE->setVisible(true);
 }
 
