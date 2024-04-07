@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     carreraapropos.cpp \
     carrerarecheche.cpp \
+    carrerarecherchehist.cpp \
     cconfiguration.cpp \
     main.cpp \
     cuirecherche.cpp
@@ -18,6 +19,7 @@ SOURCES += \
 HEADERS += \
     carreraapropos.h \
     carrerarecheche.h \
+    carrerarecherchehist.h \
     cconfiguration.h \
     cuirecherche.h
 

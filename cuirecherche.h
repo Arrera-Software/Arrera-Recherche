@@ -5,6 +5,7 @@
 #include "carrerarecheche.h"
 #include "carreraapropos.h"
 #include "CConfiguration.h"
+#include "carrerarecherchehist.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -61,5 +62,6 @@ private:
     CArreraRecheche arecherche;
     CArreraApropos* wApropos;
     Cconfiguration filePara;
+    CArreraRechercheHist ahistorique;
 };
 #endif // CUIRECHERCHE_H
