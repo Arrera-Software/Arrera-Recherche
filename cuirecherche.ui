@@ -498,10 +498,16 @@
       </item>
       <item>
        <widget class="QListWidget" name="IDC_LISTMOTEUR">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>1</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
           <width>100</width>
-          <height>70</height>
+          <height>21</height>
          </size>
         </property>
         <property name="tabKeyNavigation">
