@@ -12,6 +12,7 @@ CUIRecherche::CUIRecherche(QWidget *parent)
     arecherche = CArreraRecheche();
     wApropos = new CArreraApropos(this);
     ui->FPARAMETRE->setVisible(false);
+    ui->IDC_LISTMOTEUR->setSelectionMode(QAbstractItemView::SingleSelection);
     connect(this,&CUIRecherche::destroyed,wApropos,&CUIRecherche::close);
 }
 
@@ -135,5 +136,21 @@ void CUIRecherche::on_IDC_PARA_clicked()
     ui->FRECHERCHE->setVisible(false);
     ui->FBTN->setVisible(false);
     ui->FPARAMETRE->setVisible(true);
+}
+
+
+void CUIRecherche::on_IDC_VALIDERMOTEUR_clicked()
+{
+    QListWidgetItem* item;
+    item = ui->IDC_LISTMOTEUR->currentItem();
+    if(item)
+    {
+        qDebug() << item->text();
+    }
+    else
+    {
+        qDebug() << "pas de selection";
+    }
+
 }
 

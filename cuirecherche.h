@@ -50,6 +50,8 @@ private slots:
 
     void on_IDC_PARA_clicked();
 
+    void on_IDC_VALIDERMOTEUR_clicked();
+
 private:
     Ui::CUIRecherche *ui;
     CArreraRecheche arecherche;
