@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "carrerarecheche.h"
 #include "carreraapropos.h"
+#include "CConfiguration.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -54,7 +55,9 @@ private slots:
 
 private:
     Ui::CUIRecherche *ui;
+    string fileConfig ;
     CArreraRecheche arecherche;
     CArreraApropos* wApropos;
+    Cconfiguration filePara;
 };
 #endif // CUIRECHERCHE_H

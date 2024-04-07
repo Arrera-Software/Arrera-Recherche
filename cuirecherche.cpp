@@ -8,12 +8,20 @@ CUIRecherche::CUIRecherche(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::CUIRecherche)
 {
+    bool sortieFile;
+    fileConfig = "configRecherche.ini";
     ui->setupUi(this);
     arecherche = CArreraRecheche();
     wApropos = new CArreraApropos(this);
     ui->FPARAMETRE->setVisible(false);
     ui->IDC_LISTMOTEUR->setSelectionMode(QAbstractItemView::SingleSelection);
     connect(this,&CUIRecherche::destroyed,wApropos,&CUIRecherche::close);
+    // Fichier parametre
+    sortieFile = filePara.charger(fileConfig);
+    if (!sortieFile)
+    {
+        filePara.creerFichierIni(fileConfig);
+    }
 }
 
 CUIRecherche::~CUIRecherche()
@@ -145,12 +153,9 @@ void CUIRecherche::on_IDC_VALIDERMOTEUR_clicked()
     item = ui->IDC_LISTMOTEUR->currentItem();
     if(item)
     {
-        qDebug() << item->text();
+        filePara.definirParametre("moteur",item->text().toStdString());
+        filePara.sauvegarder(fileConfig);
+        on_IDC_RETOURMAIN_clicked();
     }
-    else
-    {
-        qDebug() << "pas de selection";
-    }
-
 }
 
