@@ -224,3 +224,9 @@ void CUIRecherche::on_IDC_VALIDERRECHERCHE_clicked()
     }
 }
 
+
+void CUIRecherche::on_IDC_CLEARHIST_clicked()
+{
+    ahistorique.clear();
+}
+
