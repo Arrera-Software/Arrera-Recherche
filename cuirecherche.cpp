@@ -21,6 +21,8 @@ CUIRecherche::CUIRecherche(QWidget *parent)
     if (!sortieFile)
     {
         filePara.creerFichierIni(fileConfig);
+        filePara.definirParametre("moteur","google");
+        filePara.sauvegarder(fileConfig);
     }
 }
 
