@@ -174,22 +174,12 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>10</y>
+       <y>60</y>
        <width>381</width>
-       <height>551</height>
+       <height>501</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QTextEdit" name="IDC_RECHERCHE">
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>30</height>
-         </size>
-        </property>
-       </widget>
-      </item>
       <item>
        <widget class="QPushButton" name="IDC_DUCKDUCKGO">
         <property name="maximumSize">
@@ -415,6 +405,40 @@
         </property>
         <property name="text">
          <string>Resultat sur Reverso</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="horizontalLayoutWidget_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>381</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QTextEdit" name="IDC_RECHERCHE">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="IDC_VALIDERRECHERCHE">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Recherche</string>
         </property>
        </widget>
       </item>

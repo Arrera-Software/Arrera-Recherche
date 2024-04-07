@@ -53,6 +53,8 @@ private slots:
 
     void on_IDC_VALIDERMOTEUR_clicked();
 
+    void on_IDC_VALIDERRECHERCHE_clicked();
+
 private:
     Ui::CUIRecherche *ui;
     string fileConfig ;

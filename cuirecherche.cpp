@@ -1,4 +1,4 @@
-#include "cuirecherche.h"
+﻿#include "cuirecherche.h"
 #include "ui_cuirecherche.h"
 #include <QDesktopServices>
 #include <QUrl>
@@ -158,6 +158,55 @@ void CUIRecherche::on_IDC_VALIDERMOTEUR_clicked()
         filePara.definirParametre("moteur",item->text().toStdString());
         filePara.sauvegarder(fileConfig);
         on_IDC_RETOURMAIN_clicked();
+    }
+}
+
+
+void CUIRecherche::on_IDC_VALIDERRECHERCHE_clicked()
+{
+    string moteur = filePara.obtenirParametre("moteur");
+    if (moteur=="google")
+    {
+        on_IDC_GOOGLE_clicked();
+    }
+    else
+    {
+        if (moteur=="Bing")
+        {
+            on_IDC_BING_clicked();
+        }
+        else
+        {
+            if (moteur=="duckduckgo")
+            {
+                on_IDC_DUCKDUCKGO_clicked();
+            }
+            else
+            {
+                if(moteur=="Ecosia")
+                {
+                    on_IDC_ECOSIA_clicked();
+                }
+                else
+                {
+                    if(moteur=="Brave")
+                    {
+                        on_IDC_BRAVE_clicked();
+                    }
+                    else
+                    {
+                        if (moteur=="Qwant")
+                        {
+                            on_IDC_QWANT_clicked();
+                        }
+                        else
+                        {
+                            on_IDC_GOOGLE_clicked();
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
