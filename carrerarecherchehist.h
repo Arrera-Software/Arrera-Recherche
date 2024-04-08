@@ -13,6 +13,7 @@ public:
     CArreraRechercheHist();
     bool add(QString valeur);
     bool clear();
+    QString read();
 };
 
 #endif // CARRERARECHERCHEHIST_H

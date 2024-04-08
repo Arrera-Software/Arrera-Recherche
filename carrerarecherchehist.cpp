@@ -30,3 +30,15 @@ bool CArreraRechercheHist::clear()
     file.close();
     return true;
 }
+
+QString CArreraRechercheHist::read()
+{
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        return "-1";
+    }
+    QTextStream in(&file);
+    return in.readAll();
+
+}

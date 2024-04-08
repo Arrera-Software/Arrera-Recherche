@@ -15,7 +15,9 @@ CUIRecherche::CUIRecherche(QWidget *parent)
     ahistorique = CArreraRechercheHist();
     wApropos = new CArreraApropos(this);
     ui->FPARAMETRE->setVisible(false);
+    ui->FHIST->setVisible(false);
     ui->IDC_LISTMOTEUR->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->IDC_THIST->setReadOnly(true);
     connect(this,&CUIRecherche::destroyed,wApropos,&CUIRecherche::close);
     // Fichier parametre
     sortieFile = filePara.charger(fileConfig);
@@ -228,5 +230,22 @@ void CUIRecherche::on_IDC_VALIDERRECHERCHE_clicked()
 void CUIRecherche::on_IDC_CLEARHIST_clicked()
 {
     ahistorique.clear();
+}
+
+
+void CUIRecherche::on_IDC_RETOURMAINHIST_clicked()
+{
+    ui->FHIST->setVisible(false);
+    ui->FRECHERCHE->setVisible(true);
+    ui->FBTN->setVisible(true);
+}
+
+
+void CUIRecherche::on_IDC_HIST_clicked()
+{
+    ui->FHIST->setVisible(true);
+    ui->FRECHERCHE->setVisible(false);
+    ui->FBTN->setVisible(false);
+    ui->IDC_THIST->setPlainText(ahistorique.read());
 }
 

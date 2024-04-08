@@ -58,6 +58,10 @@ private slots:
 
     void on_IDC_CLEARHIST_clicked();
 
+    void on_IDC_RETOURMAINHIST_clicked();
+
+    void on_IDC_HIST_clicked();
+
 private:
     Ui::CUIRecherche *ui;
     string fileConfig ;
