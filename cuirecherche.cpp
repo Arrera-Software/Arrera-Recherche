@@ -16,7 +16,6 @@ CUIRecherche::CUIRecherche(QWidget *parent)
     wApropos = new CArreraApropos(this);
     ui->FPARAMETRE->setVisible(false);
     ui->FHIST->setVisible(false);
-    ui->IDC_LISTMOTEUR->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->IDC_THIST->setReadOnly(true);
     connect(this,&CUIRecherche::destroyed,wApropos,&CUIRecherche::close);
     // Fichier parametre
@@ -167,14 +166,10 @@ void CUIRecherche::on_IDC_PARA_clicked()
 
 void CUIRecherche::on_IDC_VALIDERMOTEUR_clicked()
 {
-    QListWidgetItem* item;
-    item = ui->IDC_LISTMOTEUR->currentItem();
-    if(item)
-    {
-        filePara.definirParametre("moteur",item->text().toStdString());
-        filePara.sauvegarder(fileConfig);
-        on_IDC_RETOURMAIN_clicked();
-    }
+    QString moteurSelectionner = ui->IDC_LISTMOTEUR->currentText();
+    filePara.definirParametre("moteur",moteurSelectionner.toStdString());
+    filePara.sauvegarder(fileConfig);
+    on_IDC_RETOURMAIN_clicked();
 }
 
 
